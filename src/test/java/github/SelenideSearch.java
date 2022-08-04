@@ -45,7 +45,9 @@ public class SelenideSearch {
 
         // Проверить, что внутри есть пример кода для JUnit5
         $("#wiki-body").shouldHave(text("Using JUnit5"));
-        sleep (4000);
+
+        // Debug options:
+        // sleep (4000);
     }
 
     @AfterAll
