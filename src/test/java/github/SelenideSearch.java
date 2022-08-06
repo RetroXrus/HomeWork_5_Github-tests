@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class SelenideSearch {
@@ -26,7 +27,7 @@ public class SelenideSearch {
         // Проверить, что в заголовке встречается selenide/selenide
         $(".codesearch-results").shouldHave(text("selenide/selenide"));
         // Перейти по первому результату
-        $$("ul.repo-list li").first().$("a").click();
+        $("ul.repo-list li").$("a").click(); //$$("ul.repo-list li").first() - можно оптимизировать на $("ul.repo-list li") - тоже самое, только работает быстрее
         // Перейти в раздел Wiki
         $("#wiki-tab").click();
 
@@ -41,8 +42,8 @@ public class SelenideSearch {
         $(".js-wiki-more-pages-link").click();
         $("#wiki-pages-box").shouldHave(text("SoftAssertions"));
         // Перейти в раздел "Soft assertions" в Pages
-        $("#wiki-pages-box").$("ul li",19).$("a").click();
-
+        //$("#wiki-pages-box").$("ul li",19).$("a").click();
+        $(byText("Soft assertions")).click();       // Очень нежелательно привязываться к порядку элемента при выборе локатора. Лучше воспользоваться поиском локатора по тексту.
         // Проверить, что внутри есть пример кода для JUnit5
         $("#wiki-body").shouldHave(text("Using JUnit5"));
 
